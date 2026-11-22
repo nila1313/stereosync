@@ -1,3 +1,5 @@
+"""Score one frame offset: how well do the corners seen by both cameras fit one stereo geometry (fundamental matrix with RANSAC)?"""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

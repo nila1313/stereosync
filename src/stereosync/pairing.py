@@ -1,3 +1,5 @@
+"""Build the left frame / right frame pairs from the sections."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

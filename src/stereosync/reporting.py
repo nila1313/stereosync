@@ -1,3 +1,5 @@
+"""Write the window results, sections and frame pairs as yml files."""
+
 from __future__ import annotations
 
 from pathlib import Path

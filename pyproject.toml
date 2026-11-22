@@ -5,14 +5,32 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "stereosync"
 version = "0.1.0"
-description = "Find the frame offset between two cameras from their ChArUco detections"
+description = "Find the frame offset between two cameras from their ChArUco board detections"
+readme = "README.md"
+authors = [{ name = "Nila Maitra Chaity" }]
 requires-python = ">=3.10"
+keywords = ["camera calibration", "stereo", "synchronization", "charuco", "calibcam"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Image Processing",
+]
 # OpenCV (4.7 or newer, any variant such as opencv-contrib-python-headless) and numpy
 # are needed but not listed, so pip does not replace the versions already in your environment.
 dependencies = [
     "pyyaml",
     "bbo-calibcamlib",
 ]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.scripts]
+stereosync = "stereosync.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/nila1313/stereosync"
+Issues = "https://github.com/nila1313/stereosync/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

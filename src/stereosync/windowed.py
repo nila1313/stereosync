@@ -1,3 +1,5 @@
+"""Try every offset in windows of frames and keep the best and second best per window."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

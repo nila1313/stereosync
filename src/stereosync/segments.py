@@ -1,3 +1,5 @@
+"""Keep the trusted windows and join neighbouring windows with the same offset into sections."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
