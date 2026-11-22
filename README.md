@@ -27,11 +27,36 @@ replace the versions you already have.
    python -m calibcam --videos left.MP4 right.MP4 --board board.npy --detection --frames_step 1 --data_path detections/
    ```
 
+   It has to be every frame, because to test offset +1 the tool needs right frame t+1 next to left frame t. With
+   every 30th frame, for example, those frames are missing and it cannot decide.
+
 2. Run stereosync on the two detection files:
 
    ```
    stereosync --detections detections/detection_000.yml detections/detection_001.yml --offsets -15 15 --out sync/
    ```
+
+   The output looks like this (shortened):
+
+   ```
+   Windows
+     255-354: no result
+     355-454: offset +7, inlier ratio 0.724, lead 0.135, frame pairs 10
+     ...
+     2055-2154: offset -7, inlier ratio 0.452, lead 0.000, frame pairs 4
+
+   Sections
+     355-2054: offset +7 (15 windows, mean inlier ratio 0.512)
+
+   One offset for the whole recording. For calibcam use:
+     --frames_offsets 0 7
+   ```
+
+   `no result` means there were not enough frames in that window where both cameras see the board. The last window has only 4 frame pairs and no
+   lead over the second best, so it is not trusted and not part of a section.
+
+   In the `--out` folder you get `sync_window_results.yml` (every window), `sync_segments.yml` (the sections),
+   `sync_pairs.yml` (all frame pairs) and `frames_list_000.yml` / `frames_list_001.yml` for calibcam.
 
 3. Use the result in calibcam. If one offset fits the whole video, stereosync prints it, for example
    `--frames_offsets 0 7`. If the offset changes during the video, it writes two frames lists instead, which you put
